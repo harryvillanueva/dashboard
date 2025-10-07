@@ -71,21 +71,21 @@ if (isset($_SESSION['usuario_id'])) {
 // Router principal
 switch($controller) {
     case 'auth':
-        $authController = new AuthController($db);
-        switch($action) {
-            case 'login':
-                $authController->login();
-                break;
-            case 'logout':
-                $authController->logout();
-                break;
-            case 'registro':
-                $authController->registro();
-                break;
-            default:
-                $authController->login();
-        }
-        break;
+    $authController = new AuthController($db);
+    switch($action) {
+        case 'login':
+            $authController->login();
+            break;
+        case 'logout':  // ← Asegúrate de que esta línea existe
+            $authController->logout();
+            break;
+        case 'registro':
+            $authController->registro();
+            break;
+        default:
+            $authController->login();
+    }
+    break;
 
     case 'paginas-web':
         $paginaWebController = new PaginaWebController($db);
@@ -134,24 +134,33 @@ switch($controller) {
         break;
 
     case 'usuarios':
-        $usuarioController = new UsuarioController($db);
-        switch($action) {
-            case 'crear':
-                $usuarioController->crear();
-                break;
-            case 'editar':
-                $usuarioController->editar();
-                break;
-            case 'eliminar':
-                $usuarioController->eliminar();
-                break;
-            case 'perfil':
-                $usuarioController->perfil();
-                break;
-            default:
-                $usuarioController->listar();
-        }
-        break;
+    $usuarioController = new UsuarioController($db);
+    switch($action) {
+        case 'crear':
+            $usuarioController->crear();
+            break;
+        case 'editar':
+            $usuarioController->editar();
+            break;
+        case 'eliminar':
+            $usuarioController->eliminar();
+            break;
+        case 'ver':
+            $usuarioController->ver();
+            break;
+        case 'perfil':  // ← Nueva acción
+            $usuarioController->perfil();
+            break;
+        case 'actualizarPerfil':  // ← Nueva acción
+            $usuarioController->actualizarPerfil();
+            break;
+        case 'cambiarPassword':  // ← Nueva acción
+            $usuarioController->cambiarPassword();
+            break;
+        default:
+            $usuarioController->listar();
+    }
+    break;
 
     case 'fragmentos-codigo':
     $fragmentoCodigoController = new FragmentoCodigoController($db);
